@@ -9,9 +9,16 @@ fw = front_wheels.Front_Wheels(db='config')
 bw = back_wheels.Back_Wheels(db='config')
 
 def straight_run():
-	while i<10:
-		bw.speed = 70
-		bw.forward()
-		fw.turn_straight()
-    i += 1
+    i=0
+    bw.speed = 70
+    bw.forward()
+    fw.turn_straight()
+    
+    while i<number:
+        time.sleep(1)
+        i+=1
+
+    bw.stop()
+
+straight_run(3)
 
