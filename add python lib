@@ -8,3 +8,12 @@ if not new_lib in os.environ['LD_LIBRARY_PATH']:
 
 import xyz
 #do something else
+
+
+--------------
+3
+
+I had similar issue it turned out be that the supporting libraries that you used were 
+installed as a different user (in my case pi user), which root did not "see" or were in root's path. 
+A simple test went to run them as sudo (which simulates running as root) i got this error.
+sudo -H -u user /absolute/path/of/python/executable /absolute/path/to/python/program
