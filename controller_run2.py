@@ -1,3 +1,4 @@
+#!/usr/bin/python
 from picar import front_wheels
 from picar import back_wheels
 import picar
