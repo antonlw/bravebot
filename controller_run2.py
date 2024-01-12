@@ -8,7 +8,7 @@ import random
 import time
 
 # change joystick left x to a turning angle 
-def ax2angle(self, x):
+def ax2angle(x):
     amax=135
     amin=45
     return (x+1)/2*90+amin
@@ -16,9 +16,11 @@ def ax2angle(self, x):
 
 
 # change joystick right y to a speed value
-def ax2speed(self, y):
+def ax2speed(y):
     smax=100
     smin=0
+    if int(y) > 0:
+        print("Y is " + str(y))
     return y*100
 
 
@@ -36,20 +38,20 @@ with ControllerResource() as joystick:
         # read left x for turning angles
         fw.turn(ax2angle(joystick.lx))
         # read right y for running speed
-        speed=ax2speed(joystick.ry)
-        if speed>=0:
+        speed=int(ax2speed(joystick.ry))
+        if speed>0:
             bw.speed = speed
             bw.forward()
-        else:
+        elif speed<0:
             bw.speed = 0-speed
             bw.backward()
         # This is an instance of approxeng.input.ButtonPresses
-        #presses = joystick.check_presses()
-        #if presses['square']
-        #    print('SQUARE pressed since last check')
-        # We can also use attributes directly, and get at the presses object from the controller:
-        if joystick.presses.circle:
+        presses = joystick.check_presses()
+        if presses['circle']:
             print('CIRCLE pressed since last check')
+        # We can also use attributes directly, and get at the presses object from the controller:
+        #if joystick.presses.circle:
+        #    print('CIRCLE pressed since last check')
             print('Exit Mission.')
             bw.stop()
             break
@@ -60,3 +62,4 @@ with ControllerResource() as joystick:
         # If we had any presses, print the list of pressed buttons by standard name
         #if joystick.has_presses:
         #    print(joystick.presses)
+
