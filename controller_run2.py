@@ -1,4 +1,6 @@
 #!/usr/bin/python
+#bash -c '/usr/bin/python3 /home/pi/myscript.py > /home/pi/controller_run2.log 2>&1' &
+
 from picar import front_wheels
 from picar import back_wheels
 import picar
